@@ -3,12 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Minus -- simple and beautiful editor.</title>
+    <style>
+    #board {
+        margin: 1em auto;
+        width: 36em;
+    }
+    #minus {
+        margin: 1em auto;
+        padding: 1em;
+        width: 36em;
+        min-height: 10em;
+        line-height: 36px;
+        font-size: 18px;
+        outline: none;
+        border: 5px dashed #CCC;
+        background: #EFEFEF;
+    }
+    #minus:focus {
+        border-color: #069;
+    }
+    #minus p {
+        margin: 1em 0;
+    }
+    #minus p:first-child,
+    #minus p:last-child {
+        margin: 0;
+    }
+    </style>
 </head>
 <body>
+    <div id="board">
+        <button id="b0">setCursor</button>
+    </div>
     <div id="minus"></div>
+    <!--
+        <p>我与父亲不相见已二年余了，我最不能忘记的是他的背影。</p>
+        <p>那年冬天，祖母死了，父亲的差使也交卸了，正是祸不单行的日子。我从北京到徐州，打算跟着父亲奔丧回家。到徐州见着父亲，看见满院狼藉的东西，又想起祖母，不禁簌簌地流下眼泪。父亲说：“事已如此，不必难过，好在天无绝人之路！”</p>
+        <p>回家变卖典质，父亲还了亏空；又借钱办了丧事。这些日子，家中光景很是惨淡，一半为了丧事，一半为了父亲赋闲。丧事完毕，父亲要到南京谋事，我也要回北京念书，我们便同行。</p>
+    -->
+    <script src="src/util.js"></script>
+    <script src="src/dtd.js"></script>
     <script src="src/minus.js"></script>
     <script>
-    minus('minus');
+    var mm = document.getElementById('minus');
+    var m = minus(mm);
+    var b0 = document.getElementById('b0');
+    b0.onclick = function () {
+        m.setCursor(mm);
+    };
     </script>
 </body>
 </html>
