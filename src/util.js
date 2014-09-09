@@ -54,5 +54,32 @@ var util = {
             first = tmp;
         }
         return first.nodeType !== 3 ? first : null;
+    },
+
+    findLastText: function (node) {
+        var nodeType = node.nodeType;
+        if (nodeType === 3) {
+            return node;
+        }
+
+        if (nodeType !== 1) {
+            return;
+        }
+
+        var nodeName = node.nodeName;
+        if (dtd.empty[nodeName] && dtd.nochild[nodeName]) {
+            return;
+        }
+
+        var last = node.lastChild;
+        if (!last) {
+            return;
+        }
+
+        var tmp;
+        while (tmp = last.lastChild) {
+            last = tmp;
+        }
+        return last.nodeType !== 3 ? last : null;
     }
 };

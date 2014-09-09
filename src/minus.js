@@ -44,14 +44,19 @@ Minus.prototype.setCursor = function (node, opt_offset) {
     var firstText = util.findFirstText(node);
     r.setStart(firstText || node, opt_offset || 0);
     r.collapse(true);
-    s.removeAllRanges();
+    if (s.rangeCount) {
+        s.removeAllRanges();
+    }
     s.addRange(r);
 };
 
-Minus.prototype.select = function (node) {
+Minus.prototype.setCursorFromEnd = function (node, opt_offset) {
     var s = this.win.getSelection();
     var r = this.doc.createRange();
-    r.selectNode(node);
+    var lastText = util.findLastText(node);
+    var offset = (lastText ? lastText.nodeValue.length : node.childNodes.length) - (opt_offset || 0);
+    r.setEnd(lastText || node, offset);
+    r.collapse();
     if (s.rangeCount) {
         s.removeAllRanges();
     }
